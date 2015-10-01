@@ -1,0 +1,82 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+# Samples: 90  of event 'LLC-store-misses'
+# Event count (approx.): 17631
+#
+# Overhead  Command          Shared Object               Symbol                               
+# ........  ...............  ..........................  .....................................
+#
+     7.75%  Xorg             [kernel.kallsyms]           [k] setup_sigcontext                 
+     6.89%  rcu_sched        [kernel.kallsyms]           [k] mutex_lock                       
+     6.68%  swapper          [kernel.kallsyms]           [k] _raw_spin_lock                   
+     5.85%  ibus-engine-sim  [kernel.kallsyms]           [k] __mem_cgroup_count_vm_event      
+     5.62%  swapper          [kernel.kallsyms]           [k] cpu_startup_entry                
+     4.12%  accounts-daemon  libc-2.19.so                [.] 0x000000000008c665               
+     4.12%  gnome-terminal   libcairo.so.2.11301.0       [.] 0x0000000000018670               
+     3.57%  Xorg             Xorg                        [.] 0x0000000000070a0c               
+     3.22%  gnome-terminal   libcairo.so.2.11301.0       [.] 0x0000000000022f0b               
+     2.78%  Xorg             [kernel.kallsyms]           [k] memcpy                           
+     2.21%  gnome-terminal   libcairo.so.2.11301.0       [.] 0x000000000002c87a               
+     2.21%  swapper          [kernel.kallsyms]           [k] fib_table_lookup                 
+     2.17%  swapper          [kernel.kallsyms]           [k] __schedule                       
+     2.17%  swapper          [kernel.kallsyms]           [k] __switch_to                      
+     1.66%  compiz           libc-2.19.so                [.] 0x000000000004dcdc               
+     1.66%  compiz           libsnap.so                  [.] 0x00000000000084d0               
+     1.64%  sleep            [kernel.kallsyms]           [k] find_next_iomem_res              
+     1.63%  compiz           [kernel.kallsyms]           [k] mutex_lock                       
+     1.63%  compiz           libcomposite.so             [.] 0x000000000001a3d4               
+     1.63%  swapper          [kernel.kallsyms]           [k] native_write_msr_safe            
+     1.49%  compiz           i965_dri.so                 [.] 0x00000000003c3a38               
+     1.49%  compiz           libglib-2.0.so.0.4002.0     [.] 0x000000000008a970               
+     1.49%  compiz           libpthread-2.19.so          [.] 0x000000000000a436               
+     1.49%  thermald         [kernel.kallsyms]           [k] _raw_spin_lock_irqsave           
+     1.48%  swapper          [kernel.kallsyms]           [k] notifier_call_chain              
+     1.45%  sleep            [kernel.kallsyms]           [k] unmap_page_range                 
+     1.40%  swapper          [kernel.kallsyms]           [k] _raw_spin_lock_irqsave           
+     1.34%  swapper          [kernel.kallsyms]           [k] nohz_balance_enter_idle          
+     1.27%  kworker/6:3      [kernel.kallsyms]           [k] _raw_spin_unlock_irqrestore      
+     1.04%  compiz           libc-2.19.so                [.] 0x000000000007fcc5               
+     1.04%  compiz           libcompiz_core.so.0.9.11.3  [.] 0x0000000000058bf7               
+     0.92%  compiz           i965_dri.so                 [.] 0x00000000003751bd               
+     0.87%  jbd2/sda6-8      [kernel.kallsyms]           [k] jbd2_journal_put_journal_head    
+     0.87%  swapper          [kernel.kallsyms]           [k] mix_pool_bytes                   
+     0.82%  swapper          [kernel.kallsyms]           [k] _mix_pool_bytes                  
+     0.82%  swapper          [kernel.kallsyms]           [k] ext4_finish_bio                  
+     0.82%  perf             [kernel.kallsyms]           [k] enqueue_entity                   
+     0.79%  rcuos/0          [kernel.kallsyms]           [k] __local_bh_enable_ip             
+     0.74%  jbd2/sda6-8      [kernel.kallsyms]           [k] __jbd2_journal_temp_unlink_buffer
+     0.71%  compiz           libc-2.19.so                [.] 0x000000000007efc2               
+     0.71%  compiz           libc-2.19.so                [.] 0x0000000000082777               
+     0.69%  compiz           i965_dri.so                 [.] 0x00000000003cc050               
+     0.69%  compiz           libdrm_intel.so.1.0.0       [.] 0x0000000000005fca               
+     0.67%  compiz           [kernel.kallsyms]           [k] alloc_skb_with_frags             
+     0.67%  swapper          [kernel.kallsyms]           [k] get_next_timer_interrupt         
+     0.60%  swapper          [kernel.kallsyms]           [k] account_process_tick             
+     0.52%  kworker/3:2      [kernel.kallsyms]           [k] find_first_bit                   
+     0.51%  rcuos/6          [kernel.kallsyms]           [k] rcu_nocb_kthread                 
+     0.48%  kworker/u16:0    [kernel.kallsyms]           [k] mempool_alloc                    
+     0.45%  perf             [kernel.kallsyms]           [k] _raw_read_lock                   
+     0.42%  rcuos/7          [kernel.kallsyms]           [k] file_free_rcu                    
+     0.39%  swapper          [kernel.kallsyms]           [k] __tick_nohz_idle_enter           
+     0.37%  swapper          [kernel.kallsyms]           [k] calc_load_enter_idle             
+     0.34%  rcuos/4          [kernel.kallsyms]           [k] _raw_spin_lock_irqsave           
+     0.27%  swapper          [kernel.kallsyms]           [k] __update_cpu_load                
+     0.12%  acpid            [kernel.kallsyms]           [k] _raw_spin_lock_irqsave           
+     0.10%  perf             [kernel.kallsyms]           [k] perf_mmap_to_page                
+     0.07%  perf             [kernel.kallsyms]           [k] prepend_path                     
+     0.07%  perf             ld-2.19.so                  [.] 0x000000000000f475               
+     0.07%  swapper          [kernel.kallsyms]           [k] cpuidle_enter_state              
+     0.07%  swapper          [kernel.kallsyms]           [k] ehci_urb_done                    
+     0.06%  perf             [kernel.kallsyms]           [k] _raw_spin_lock_irq               
+     0.01%  rcuos/4          [kernel.kallsyms]           [k] arch_scale_cpu_capacity          
+     0.01%  perf             [kernel.kallsyms]           [k] __wake_up_common                 
+     0.01%  perf             [kernel.kallsyms]           [k] anon_pipe_buf_release            
+     0.01%  perf             [kernel.kallsyms]           [k] copy_page_from_iter_iovec        
+     0.01%  rcuos/4          [kernel.kallsyms]           [k] update_cfs_rq_blocked_load       
+     0.01%  swapper          [kernel.kallsyms]           [k] hrtimer_interrupt                
+     0.01%  swapper          [kernel.kallsyms]           [k] rcu_eqs_enter_common.isra.44     
+     0.01%  swapper          [kernel.kallsyms]           [k] rcu_eqs_exit                     
+     0.01%  swapper          [kernel.kallsyms]           [k] rcu_eqs_exit_common.isra.45      
+     0.01%  swapper          [kernel.kallsyms]           [k] smp_apic_timer_interrupt         
+
+
