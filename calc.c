@@ -2,35 +2,56 @@
 #include <stdlib.h>
 #include <string.h>
 
-void get_line(FILE * fp, char * target, char * line) {
-        char * fgetsRtn;
 
-        while (fgets(line, 1024, fp)) {
-                /*printf("%s \n", line);*/
-                if (strstr(line, target)) //if target str exists 
-                       return;
-        }
-}
-
-int get_e_cnt(char * line) {
-        int count;
+int get_e_cnt(FILE * fp) {
+        char line[1024];
+        char * target = "mem-stores";
+        int tot_count = 0, times = 0;
+        int count = 0;
         char * token;
         char * count_str;
 
+        while (fgets(line, 1024, fp)) {
+                /*printf("%s \n", line);*/
+                if (strstr(line, target)) {//if target str exists 
+                        count = get_cnt(line);
+                        tot_count += count;
+                        times++;
+                }
+        }
+        if (tot_count != 0 && times != 0) {
+                /*delete the last count to get a more accurate result*/
+                tot_count -= count;
+                times--;
+
+                printf("total count = %d\n", tot_count);
+                printf("times = %d\n", times);
+
+                /*get a mean value*/
+                count = get_mean(tot_count, times);
+        }
+
+
+        return count;
+}
+
+int get_cnt(char * line) {
+        char * token, * count_str;
+        int count;
+
         /*get count in string*/
         token = strtok(line, " \t\n");
-        while (token != NULL) {
-                count_str = token;
-                /*printf("%s\n", token);*/
-                token = strtok(NULL, " \t\n");
-        }
-        /*printf("%s\n", count_str);*/
-
+        count_str = strtok(NULL, " \t\n");
+        printf("count = %s\n", count_str);
 
         /*convert string to integer*/
         count = atoi(count_str);
 
         return count;
+}
+
+int get_mean(int total, int times) {
+        return total/times;
 }
 
 int add_latency(int ori_latency) {
@@ -55,16 +76,9 @@ int main(int argc, char * argv[]) {
         /*printf("Open %s successfully.\n", infile);*/
 
 
-        /*find the line including the event count*/
-        char line[1024];
-        char * target = "Event count";
-        get_line(fp, target, line);
-        /*printf("%s", line);*/
-        
-        
         /*get the event count*/
         int count;
-        count = get_e_cnt(line);
+        count = get_e_cnt(fp);
         printf("count = %d\n", count);
 
 
@@ -72,6 +86,10 @@ int main(int argc, char * argv[]) {
         int res;
         res = add_latency(count);
         printf("the final result = %d\n", res);
+
+
+        /*close file*/
+        fclose(fp);
 
         return 0;
 }

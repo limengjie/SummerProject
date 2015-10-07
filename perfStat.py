@@ -2,20 +2,23 @@
 
 from subprocess import *
 
+#components of command
+sudo = 'sudo '
 path = '../linux-3.19/tools/perf/'
-cmd_record = 'perf record -e LLC-store-misses -a sleep 3'
-cmd_redirect = 'perf report > perfReport.txt'
-cmd_calc = './calculate perfReport.txt'
-event = 'sudo '+ path + cmd_record
-redirect = 'sudo ' + path + cmd_redirect
-calculate = cmd_calc
+cmd = 'perf stat '
+interv = '-I 100 '
+event = '-e mem-stores '
+time = '-a sleep 2 '
+redirect = '2> '
+outfile = 'perfReport.txt'
+record = sudo + path + cmd + interv + event + time + redirect + outfile
+calc = './calculate ' 
+calculate = calc + outfile
 
 
-#record the performance stat
-call(event, shell=True)
 
-#redirect the stat to textfile
-call(redirect, shell=True)
+#count the events and redirect to a file
+call(record, shell=True)
 
 #add the latency
-call(calculate, shell=True)
+#call(calculate, shell=True)

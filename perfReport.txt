@@ -1,95 +1,21 @@
-# To display the perf.data header info, please use --header/--header-only options.
-#
-# Samples: 113  of event 'LLC-store-misses'
-# Event count (approx.): 14608
-#
-# Overhead  Command          Shared Object               Symbol                       
-# ........  ...............  ..........................  .............................
-#
-     6.22%  kworker/4:1      [kernel.kallsyms]           [k] refresh_cpu_vm_stats     
-     5.85%  swapper          [kernel.kallsyms]           [k] __switch_to              
-     5.55%  swapper          [kernel.kallsyms]           [k] account_process_tick     
-     5.13%  Xorg             [kernel.kallsyms]           [k] _raw_spin_lock_irqsave   
-     4.17%  accounts-daemon  libglib-2.0.so.0.4002.0     [.] 0x000000000006428e       
-     2.40%  swapper          [kernel.kallsyms]           [k] _raw_spin_lock_irqsave   
-     2.40%  swapper          [kernel.kallsyms]           [k] tick_do_update_jiffies64 
-     2.25%  swapper          [kernel.kallsyms]           [k] native_write_msr_safe    
-     2.05%  Xorg             Xorg                        [.] 0x000000000019e4cc       
-     1.83%  gnome-terminal   libgtk-3.so.0.1000.8        [.] 0x0000000000230aa0       
-     1.81%  kworker/u16:1    [kernel.kallsyms]           [k] elv_set_request          
-     1.73%  gnome-terminal   libc-2.19.so                [.] 0x000000000007fceb       
-     1.73%  gnome-terminal   libcairo.so.2.11301.0       [.] 0x000000000002c7ce       
-     1.66%  swapper          [kernel.kallsyms]           [k] load_balance             
-     1.64%  compiz           libdrm_intel.so.1.0.0       [.] 0x0000000000005c06       
-     1.61%  compiz           libcompiz_core.so.0.9.11.3  [.] 0x0000000000058bfe       
-     1.56%  Xorg             [kernel.kallsyms]           [k] __radix_tree_lookup      
-     1.55%  sleep            [kernel.kallsyms]           [k] __vma_link_list          
-     1.49%  gnome-terminal   [kernel.kallsyms]           [k] unix_stream_sendmsg      
-     1.47%  gnome-terminal   libXrender.so.1.3.0         [.] 0x0000000000002379       
-     1.47%  gnome-terminal   libcairo.so.2.11301.0       [.] 0x0000000000021050       
-     1.38%  Xorg             intel_drv.so                [.] 0x0000000000020318       
-     1.36%  compiz           [kernel.kallsyms]           [k] cpuacct_charge           
-     1.36%  gnome-terminal   [kernel.kallsyms]           [k] do_sys_poll              
-     1.36%  gnome-terminal   libcairo.so.2.11301.0       [.] 0x0000000000018670       
-     1.33%  compiz           libdrm_intel.so.1.0.0       [.] 0x0000000000005fe2       
-     1.32%  compiz           [vdso]                      [.] 0x0000000000000a79       
-     1.32%  compiz           libdrm_intel.so.1.0.0       [.] 0x000000000000813f       
-     1.32%  compiz           libfade.so                  [.] 0x000000000000a142       
-     1.26%  sleep            ld-2.19.so                  [.] 0x00000000000103d2       
-     1.23%  compiz           i965_dri.so                 [.] 0x00000000003a1c41       
-     1.21%  compiz           libdrm_intel.so.1.0.0       [.] 0x0000000000005efe       
-     1.19%  compiz           libdrm_intel.so.1.0.0       [.] 0x0000000000005cc5       
-     1.18%  compiz           libc-2.19.so                [.] 0x00000000000fb480       
-     1.18%  compiz           libpthread-2.19.so          [.] 0x000000000000a495       
-     1.16%  Xorg             Xorg                        [.] 0x0000000000130590       
-     1.13%  compiz           [kernel.kallsyms]           [k] system_call_after_swapgs 
-     1.11%  compiz           libcompiz_core.so.0.9.11.3  [.] 0x0000000000088ee0       
-     1.07%  compiz           i965_dri.so                 [.] 0x00000000003cc050       
-     1.06%  gnome-terminal   libcairo.so.2.11301.0       [.] 0x0000000000022f0b       
-     1.01%  compiz           i965_dri.so                 [.] 0x00000000000470a0       
-     0.98%  Xorg             [kernel.kallsyms]           [k] aa_file_perm             
-     0.97%  compiz           libc-2.19.so                [.] 0x000000000007fda2       
-     0.97%  compiz           libglib-2.0.so.0.4002.0     [.] 0x00000000000456d4       
-     0.95%  gnome-terminal   [kernel.kallsyms]           [k] free_pages_prepare       
-     0.95%  gnome-terminal   libcairo.so.2.11301.0       [.] 0x0000000000021460       
-     0.92%  Xorg             [kernel.kallsyms]           [k] do_select                
-     0.89%  swapper          [kernel.kallsyms]           [k] update_vsyscall          
-     0.88%  Xorg             [kernel.kallsyms]           [k] sys_writev               
-     0.88%  rcu_sched        [kernel.kallsyms]           [k] force_qs_rnp             
-     0.87%  kworker/3:2      [kernel.kallsyms]           [k] refresh_cpu_vm_stats     
-     0.87%  swapper          [kernel.kallsyms]           [k] perf_pmu_disable         
-     0.75%  Xorg             intel_drv.so                [.] 0x0000000000079568       
-     0.74%  kworker/0:1      [kernel.kallsyms]           [k] queue_delayed_work_on    
-     0.69%  perf             [kernel.kallsyms]           [k] page_remove_rmap         
-     0.66%  zeitgeist-datah  [kernel.kallsyms]           [k] cpuacct_charge           
-     0.61%  Xorg             libc-2.19.so                [.] 0x0000000000082df0       
-     0.61%  compiz           [kernel.kallsyms]           [k] link_path_walk           
-     0.61%  swapper          [kernel.kallsyms]           [k] enqueue_entity           
-     0.60%  Xorg             [kernel.kallsyms]           [k] _raw_spin_lock_irq       
-     0.59%  Xorg             intel_drv.so                [.] 0x0000000000072830       
-     0.59%  swapper          [kernel.kallsyms]           [k] cpu_startup_entry        
-     0.51%  Xorg             [kernel.kallsyms]           [k] next_zones_zonelist      
-     0.51%  perf             [kernel.kallsyms]           [k] unshare_fd               
-     0.51%  swapper          [kernel.kallsyms]           [k] smp_apic_timer_interrupt 
-     0.51%  swapper          [kvm]                       [k] pvclock_gtod_notify      
-     0.42%  perf             [kernel.kallsyms]           [k] perf_mmap_fault          
-     0.19%  rcuos/5          [kernel.kallsyms]           [k] unfreeze_partials.isra.42
-     0.18%  perf             [kernel.kallsyms]           [k] clear_page_c_e           
-     0.08%  perf             [kernel.kallsyms]           [k] ext4_xattr_get           
-     0.07%  rcuos/6          [kernel.kallsyms]           [k] arch_scale_cpu_capacity  
-     0.06%  perf             [kernel.kallsyms]           [k] _raw_spin_lock_irq       
-     0.06%  perf             ld-2.19.so                  [.] 0x000000000000f460       
-     0.05%  swapper          [kernel.kallsyms]           [k] _raw_spin_lock           
-     0.05%  swapper          [kernel.kallsyms]           [k] try_to_wake_up           
-     0.02%  perf             [kernel.kallsyms]           [k] __wake_up_common         
-     0.01%  perf             [kernel.kallsyms]           [k] anon_pipe_buf_release    
-     0.01%  perf             [kernel.kallsyms]           [k] copy_page_from_iter_iovec
-     0.01%  perf             [kernel.kallsyms]           [k] perf_event_for_each_child
-     0.01%  rcuos/6          [kernel.kallsyms]           [k] cpuacct_charge           
-     0.01%  swapper          [kernel.kallsyms]           [k] hrtimer_interrupt        
-     0.01%  swapper          [kernel.kallsyms]           [k] native_load_tls          
-     0.01%  swapper          [kernel.kallsyms]           [k] rb_erase                 
-     0.01%  swapper          [kernel.kallsyms]           [k] rcu_eqs_exit             
-     0.01%  swapper          [kernel.kallsyms]           [k] rcu_idle_exit            
-
-
+#           time             counts unit events
+     0.100098914        436,191,732      mem-stores               
+     0.200228924        437,620,137      mem-stores               
+     0.300336933        437,864,891      mem-stores               
+     0.400445936        434,747,308      mem-stores               
+     0.500565990        437,638,865      mem-stores               
+     0.600675473        437,139,942      mem-stores               
+     0.700786871        437,468,605      mem-stores               
+     0.800898147        437,458,023      mem-stores               
+     0.901010907        437,543,796      mem-stores               
+     1.001125599        436,270,558      mem-stores               
+     1.101256326        436,550,388      mem-stores               
+     1.201371215        437,772,368      mem-stores               
+     1.301483016        436,658,937      mem-stores               
+     1.401597572        436,650,013      mem-stores               
+     1.501708348        436,719,136      mem-stores               
+     1.601818732        437,931,747      mem-stores               
+     1.701923997        437,814,731      mem-stores               
+     1.802033164        435,595,531      mem-stores               
+     1.902149922        436,681,548      mem-stores               
+     2.000432660        429,363,310      mem-stores               
