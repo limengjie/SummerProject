@@ -14,15 +14,16 @@ int get_e_cnt(FILE * fp) {
         while (fgets(line, 1024, fp)) {
                 /*printf("%s \n", line);*/
                 if (strstr(line, target)) {//if target str exists 
-                        count = get_cnt(line);
+                        count = lnToNum(line);
                         tot_count += count;
                         times++;
+                        printf("time = %d, count = %d\n", times, count);
                 }
         }
         if (tot_count != 0 && times != 0) {
-                /*delete the last count to get a more accurate result*/
-                tot_count -= count;
-                times--;
+                /*[>delete the last count to get a more accurate result<]*/
+                /*tot_count -= count;*/
+                /*times--;*/
 
                 printf("total count = %d\n", tot_count);
                 printf("times = %d\n", times);
@@ -35,17 +36,17 @@ int get_e_cnt(FILE * fp) {
         return count;
 }
 
-int get_cnt(char * line) {
+int lnToNum(char * line) {
         char * token, * count_str;
         int count;
 
         /*get count in string*/
         token = strtok(line, " \t\n");
         count_str = strtok(NULL, " \t\n");
-        printf("count = %s\n", count_str);
+        /*printf("count = %s\n", count_str);*/
 
         /*convert string to integer*/
-        count = atoi(count_str);
+        count = my_atoi(count_str);
 
         return count;
 }
@@ -58,6 +59,21 @@ int add_latency(int ori_latency) {
         /*calculate according to the goal*/
         return ori_latency * 100;
 }
+
+int my_atoi(char * num_str) {
+        int num = 0, i;
+        for (i = 0; i < strlen(num_str); ++i) {
+                if (num_str[i] == ',')
+                        continue;
+                else {
+                        num = (num*10 + num_str[i] - '0');
+                        /*printf("%d : %d\n", i, num);*/
+                }
+        }
+
+        return num;
+}
+
 
 int main(int argc, char * argv[]) {
         if (argc != 2) {
@@ -79,7 +95,7 @@ int main(int argc, char * argv[]) {
         /*get the event count*/
         int count;
         count = get_e_cnt(fp);
-        printf("count = %d\n", count);
+        printf("average count = %d\n", count);
 
 
         /*add latency */
