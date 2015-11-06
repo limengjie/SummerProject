@@ -2,22 +2,27 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define DRAM_W_LATENCY 60
+#define NVM_W_LATENCY 150
 
-int get_e_cnt(FILE * fp) {
+/*typedef long long unsigned int*/
+
+unsigned long long get_e_cnt(FILE * fp) {
         char line[1024];
         char * target = "mem-stores";
-        int tot_count = 0, times = 0;
-        int count = 0;
+        int times = 0;
+        unsigned long long tot_count = 0; 
+        unsigned long long count = 0;
         char * token;
         char * count_str;
 
         while (fgets(line, 1024, fp)) {
                 /*printf("%s \n", line);*/
                 if (strstr(line, target)) {//if target str exists 
-                        count = lnToNum(line);
+                        count = (unsigned long long) strToNum(line);
                         tot_count += count;
                         times++;
-                        printf("time = %d, count = %d\n", times, count);
+                        /*printf("time = %d, count = %d\n", times, count);*/
                 }
         }
         if (tot_count != 0 && times != 0) {
@@ -25,43 +30,50 @@ int get_e_cnt(FILE * fp) {
                 /*tot_count -= count;*/
                 /*times--;*/
 
-                printf("total count = %d\n", tot_count);
+                /*printf("total count = %llu\n", tot_count);*/
                 printf("times = %d\n", times);
 
-                /*get a mean value*/
-                count = get_mean(tot_count, times);
+                /*[>get a mean value<]*/
+                /*count = get_mean(tot_count, times);*/
         }
 
 
-        return count;
+        return tot_count;
 }
 
-int lnToNum(char * line) {
-        char * token, * count_str;
-        int count;
+int strToNum(char * line) {
+        char * token;
+        char * count_str;
+        /*int count;*/
 
+        /*if option is -I*/
         /*get count in string*/
         token = strtok(line, " \t\n");
         count_str = strtok(NULL, " \t\n");
-        /*printf("count = %s\n", count_str);*/
+        printf("count = %s\n", count_str);
 
-        /*convert string to integer*/
-        count = my_atoi(count_str);
+        /*if option is -r*/
+        /*count_str = strtok(line, " \t\n");*/
 
-        return count;
+        /*convert string to llu*/
+        int cnt = perf_atollu(count_str);
+
+        return cnt;
 }
 
-int get_mean(int total, int times) {
-        return total/times;
-}
+/*int get_mean(int total, int times) {*/
+        /*return total/times;*/
+/*}*/
 
-int add_latency(int ori_latency) {
+unsigned long long add_latency(unsigned long long  orig_latency) {
         /*calculate according to the goal*/
-        return ori_latency * 100;
+        unsigned long long diff = NVM_W_LATENCY - DRAM_W_LATENCY;
+        return diff * orig_latency;
 }
 
-int my_atoi(char * num_str) {
-        int num = 0, i;
+int perf_atollu(char * num_str) {
+        int num = 0; 
+        int i;
         for (i = 0; i < strlen(num_str); ++i) {
                 if (num_str[i] == ',')
                         continue;
@@ -93,15 +105,15 @@ int main(int argc, char * argv[]) {
 
 
         /*get the event count*/
-        int count;
+        unsigned long long count;
         count = get_e_cnt(fp);
-        printf("average count = %d\n", count);
+        printf("total count = %llu\n", count);
 
 
         /*add latency */
-        int res;
+        unsigned long long res;
         res = add_latency(count);
-        printf("the final result = %d\n", res);
+        printf("the final result = %llu\n", res);
 
 
         /*close file*/

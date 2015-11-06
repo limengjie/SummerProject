@@ -3,11 +3,11 @@
 from subprocess import *
 
 #get pid
-proc = './hashtable --get 500 --count 1000 '
+#proc = './hashtable --get 500000 --count 500001 '
 #call('./out & pid = $!', shell=True)
 #call(proc, shell=True)
-record = 'sudo ../linux-3.19/tools/perf/perf stat -I 100 -e mem-stores\
-     ./hashtable --get 5000 --count 10000 2> perfReport.txt' 
+record = 'sudo ../linux-3.19/tools/perf/perf stat -r 5 -I 100 -e mem-stores\
+     ./hashtable --get 5000000 --count 5000001 2> perfReport.txt' 
 #call('pidof -s ' + proc + '> pid.txt', shell=True)
 #call('ps ax | pgrep out > pid.txt', shell=True)
 #id = call('./pid pid.txt', shell=True)

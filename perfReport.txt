@@ -1,4 +1,12 @@
 #           time             counts unit events
-     0.100072650          7,468,254      mem-stores               
-     0.200195725            933,631      mem-stores               
-     0.291310752          1,518,577      mem-stores               
+     0.100073793         46,574,076      mem-stores               
+     0.200201545         49,769,092      mem-stores               
+     0.300308189         57,020,410      mem-stores               
+     0.400411185         44,225,181      mem-stores               
+     0.500513390         52,830,625      mem-stores               
+     0.600617101         55,536,707      mem-stores               
+     0.700723942         51,784,579      mem-stores               
+     0.800825220         51,576,146      mem-stores               
+     0.900924135         51,671,513      mem-stores               
+     1.001026607         46,338,122      mem-stores               
+     1.084691210         14,646,277      mem-stores               
