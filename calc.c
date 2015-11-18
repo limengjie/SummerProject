@@ -7,40 +7,6 @@
 
 /*typedef long long unsigned int*/
 
-unsigned long long get_e_cnt(FILE * fp) {
-        char line[1024];
-        char * target = "mem-stores";
-        int times = 0;
-        unsigned long long tot_count = 0; 
-        unsigned long long count = 0;
-        char * token;
-        char * count_str;
-
-        while (fgets(line, 1024, fp)) {
-                /*printf("%s \n", line);*/
-                if (strstr(line, target)) {//if target str exists 
-                        count = (unsigned long long) strToNum(line);
-                        tot_count += count;
-                        times++;
-                        /*printf("time = %d, count = %d\n", times, count);*/
-                }
-        }
-        if (tot_count != 0 && times != 0) {
-                /*[>delete the last count to get a more accurate result<]*/
-                /*tot_count -= count;*/
-                /*times--;*/
-
-                /*printf("total count = %llu\n", tot_count);*/
-                printf("times = %d\n", times);
-
-                /*[>get a mean value<]*/
-                /*count = get_mean(tot_count, times);*/
-        }
-
-
-        return tot_count;
-}
-
 int strToNum(char * line) {
         char * token;
         char * count_str;
@@ -50,7 +16,7 @@ int strToNum(char * line) {
         /*get count in string*/
         token = strtok(line, " \t\n");
         count_str = strtok(NULL, " \t\n");
-        printf("count = %s\n", count_str);
+        /*printf("count = %s\n", count_str);*/
 
         /*if option is -r*/
         /*count_str = strtok(line, " \t\n");*/
@@ -61,14 +27,34 @@ int strToNum(char * line) {
         return cnt;
 }
 
-/*int get_mean(int total, int times) {*/
-        /*return total/times;*/
-/*}*/
+float get_time(char * line) {
+        float time;
+        char * time_str;
 
-unsigned long long add_latency(unsigned long long  orig_latency) {
-        /*calculate according to the goal*/
+        time_str = strtok(line, " \t\n");
+        /*printf("time = %s\n", time_str);*/
+
+        time = atof(time_str);
+        /*printf("float time = %f\n", time);*/
+
+        return time;
+
+}
+
+float add_latency(unsigned long long  orig_latency, float * time) {
+        /*calculate the extra latency based on the # of mem writes*/
         unsigned long long diff = NVM_W_LATENCY - DRAM_W_LATENCY;
-        return diff * orig_latency;
+        float tot_time;
+        float additional_time = diff*orig_latency; 
+
+        /*divide by 1,000,000,000 */
+        int i;
+        for (i = 0; i < 9; ++i)
+                additional_time /= 10;
+        /*printf("additional time = %f\n", additional_time);*/
+        tot_time = *time + additional_time;
+
+        return tot_time;
 }
 
 int perf_atollu(char * num_str) {
@@ -86,6 +72,31 @@ int perf_atollu(char * num_str) {
         return num;
 }
 
+
+void get_e_cnt(FILE * fp, unsigned long long * tot_count, float * time) {
+        char line[1024];
+        char * target = "mem-stores";
+        int times = 0;
+        unsigned long long count = 0;
+        char * token;
+        char * count_str;
+
+        *tot_count = 0;
+
+        /*parse each line*/
+        while (fgets(line, 1024, fp)) {
+                /*printf("%s \n", line);*/
+                if (strstr(line, target)) {//if target str exists 
+                        count = (unsigned long long) strToNum(line);
+                        *tot_count += count;
+                        times++;
+                        /*printf("time = %d, count = %d\n", times, count);*/
+                }
+        }
+
+        /*parse the last line to get the live time of this process*/
+        *time = get_time(line);
+}
 
 int main(int argc, char * argv[]) {
         if (argc != 2) {
@@ -106,14 +117,17 @@ int main(int argc, char * argv[]) {
 
         /*get the event count*/
         unsigned long long count;
-        count = get_e_cnt(fp);
-        printf("total count = %llu\n", count);
+        float time;
+        get_e_cnt(fp, &count, &time);
+        /*printf("total count = %llu\n", count);*/
+        /*printf("time = %f\n", time);*/
 
 
         /*add latency */
-        unsigned long long res;
-        res = add_latency(count);
-        printf("the final result = %llu\n", res);
+        float res;
+        res = add_latency(count, &time);
+        /*print the final result*/
+        printf("%f\n", res);
 
 
         /*close file*/
