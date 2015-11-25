@@ -7,9 +7,10 @@
 #### parameters
 
 INTERVAL=100
-ENTRIES=500000
-ITERATIONS=500001
+ENTRIES=5000000
+ITERATIONS=5000001
 OUTFILE=perfReport.txt
+CALCULATOR=calculate
 
 
 #### functions
@@ -76,13 +77,11 @@ done
 
 
 
-#opt0="--get"
-#opt1="--count"
 
 sudo ../linux-3.19/tools/perf/perf stat -I $INTERVAL -e mem-stores\
   ./$benchmark $opt0 $ENTRIES $opt1 $ITERATIONS 2> $OUTFILE 
 
-./calculate $OUTFILE
+./$CALCULATOR $OUTFILE
 
 
 

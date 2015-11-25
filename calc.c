@@ -4,10 +4,18 @@
 
 #define DRAM_W_LATENCY 60
 #define NVM_W_LATENCY 150
+#define NUMA 10
 
 /*typedef long long unsigned int*/
 
 int strToNum(char * line) {
+        /*perf cmd format: perf stat -I ... -e ...*/
+        /*example:*/
+        /*  time       counts      unit events*/
+        /*0.100006197    95         mem-stores*/
+        /*The output stat derived from the cmd above can be */
+        /*parsed by this function.*/
+
         char * token;
         char * count_str;
         /*int count;*/
@@ -17,9 +25,6 @@ int strToNum(char * line) {
         token = strtok(line, " \t\n");
         count_str = strtok(NULL, " \t\n");
         /*printf("count = %s\n", count_str);*/
-
-        /*if option is -r*/
-        /*count_str = strtok(line, " \t\n");*/
 
         /*convert string to llu*/
         int cnt = perf_atollu(count_str);
@@ -54,7 +59,7 @@ float add_latency(unsigned long long  orig_latency, float * time) {
         /*printf("additional time = %f\n", additional_time);*/
         tot_time = *time + additional_time;
 
-        return tot_time;
+        return tot_time + NUMA;
 }
 
 int perf_atollu(char * num_str) {
