@@ -8,7 +8,7 @@
 
 /*typedef long long unsigned int*/
 
-int strToNum(char * line) {
+void strToNum(char * line, char * count_str) {
         /*perf cmd format: perf stat -I ... -e ...*/
         /*example:*/
         /*  time       counts      unit events*/
@@ -17,19 +17,24 @@ int strToNum(char * line) {
         /*parsed by this function.*/
 
         char * token;
-        char * count_str;
+        char * str;
         /*int count;*/
 
         /*if option is -I*/
         /*get count in string*/
         token = strtok(line, " \t\n");
-        count_str = strtok(NULL, " \t\n");
+        str = strtok(NULL, " \t\n");
+        int i;
+        for(i = 0; str[i] != '\0'; ++i)
+                count_str[i] = str[i];
+        count_str[i] = '\0';
+
         /*printf("count = %s\n", count_str);*/
 
-        /*convert string to llu*/
-        int cnt = perf_atollu(count_str);
+        /*[>convert string to llu<]*/
+        /*int cnt = perf_atollu(count_str);*/
 
-        return cnt;
+        /*return count_str;*/
 }
 
 float get_time(char * line) {
@@ -84,7 +89,7 @@ void get_e_cnt(FILE * fp, unsigned long long * tot_count, float * time) {
         int times = 0;
         unsigned long long count = 0;
         char * token;
-        char * count_str;
+        char count_str[100];
 
         *tot_count = 0;
 
@@ -92,7 +97,9 @@ void get_e_cnt(FILE * fp, unsigned long long * tot_count, float * time) {
         while (fgets(line, 1024, fp)) {
                 /*printf("%s \n", line);*/
                 if (strstr(line, target)) {//if target str exists 
-                        count = (unsigned long long) strToNum(line);
+                        strToNum(line, count_str);
+                        /*printf("count_str = %s\n", count_str);*/
+                        count = (unsigned long long) perf_atollu(count_str);
                         *tot_count += count;
                         times++;
                         /*printf("time = %d, count = %d\n", times, count);*/

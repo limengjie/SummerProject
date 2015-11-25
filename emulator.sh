@@ -27,7 +27,7 @@ call_hashtable ()
 call_sps () 
 {
   #echo call sps
-  benchmark="sps"
+  benchmark="_sps"
   opt0="--count"
   opt1="--swaps"
 }
@@ -69,17 +69,19 @@ while [ "$valid_opt" = 0 ]; do
       echo no such benchmark
       echo "Benchmark list:"
       echo "   1.hashtable"
-      echo "   2.sps"
+      echo "   2._sps"
       echo "   3.sps_log"
       exit 1
   esac
 done
 
 
+##### clean up the cache before collect the statistics
+#./benchmarks/hashtable_orig --get 2000000 --count 2000000
 
 
 sudo ../linux-3.19/tools/perf/perf stat -I $INTERVAL -e mem-stores\
-  ./$benchmark $opt0 $ENTRIES $opt1 $ITERATIONS 2> $OUTFILE 
+  ./benchmarks/$benchmark $opt0 $ENTRIES $opt1 $ITERATIONS 2> $OUTFILE 
 
 ./$CALCULATOR $OUTFILE
 

@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import numpy
 
 
-# clean the cache
-call('./hashtable_orig --get 500000 --count 500000', shell=True)
+## clean up the cache
+call('./hashtable_orig --get 2000000 --count 2000000', shell=True)
 
 # benchmarks
 benchmarks = {'hashtable' : 1, 'sps' : 2, 'sps_log' : 3}
