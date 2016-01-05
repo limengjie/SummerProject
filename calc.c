@@ -6,7 +6,6 @@
 #define NVM_W_LATENCY 150
 #define NUMA 10
 
-/*typedef long long unsigned int*/
 
 void strToNum(char * line, char * count_str) {
         /*perf cmd format: perf stat -I ... -e ...*/
@@ -30,11 +29,6 @@ void strToNum(char * line, char * count_str) {
         count_str[i] = '\0';
 
         /*printf("count = %s\n", count_str);*/
-
-        /*[>convert string to llu<]*/
-        /*int cnt = perf_atollu(count_str);*/
-
-        /*return count_str;*/
 }
 
 float get_time(char * line) {
@@ -57,7 +51,9 @@ float add_latency(unsigned long long  orig_latency, float * time) {
         float tot_time;
         float additional_time = diff*orig_latency; 
 
-        /*divide by 1,000,000,000 */
+        /*printf("original lat = %llu\n", orig_latency);*/
+        
+        /*divide by 1,000,000,000, the unit is second*/
         int i;
         for (i = 0; i < 9; ++i)
                 additional_time /= 10;
@@ -67,8 +63,8 @@ float add_latency(unsigned long long  orig_latency, float * time) {
         return tot_time + NUMA;
 }
 
-int perf_atollu(char * num_str) {
-        int num = 0; 
+unsigned long long perf_atollu(char * num_str) {
+        unsigned long long num = 0; 
         int i;
         for (i = 0; i < strlen(num_str); ++i) {
                 if (num_str[i] == ',')
@@ -99,7 +95,7 @@ void get_e_cnt(FILE * fp, unsigned long long * tot_count, float * time) {
                 if (strstr(line, target)) {//if target str exists 
                         strToNum(line, count_str);
                         /*printf("count_str = %s\n", count_str);*/
-                        count = (unsigned long long) perf_atollu(count_str);
+                        count = perf_atollu(count_str);
                         *tot_count += count;
                         times++;
                         /*printf("time = %d, count = %d\n", times, count);*/

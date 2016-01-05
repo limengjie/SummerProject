@@ -80,7 +80,7 @@ done
 #./benchmarks/hashtable_orig --get 2000000 --count 2000000
 
 
-sudo ../linux-3.19/tools/perf/perf stat -I $INTERVAL -e mem-stores\
+sudo ../linux-3.19/tools/perf/perf stat -I $INTERVAL -e LLC-store-misses\
   ./benchmarks/$benchmark $opt0 $ENTRIES $opt1 $ITERATIONS 2> $OUTFILE 
 
 ./$CALCULATOR $OUTFILE

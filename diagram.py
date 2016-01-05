@@ -6,7 +6,7 @@ import numpy
 
 
 ## clean up the cache
-call('./hashtable_orig --get 2000000 --count 2000000', shell=True)
+call('./cl_cache 2000000', shell=True)
 
 # benchmarks
 benchmarks = {'hashtable' : 1, 'sps' : 2, 'sps_log' : 3}
