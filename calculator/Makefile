@@ -1,5 +1,5 @@
 input = calc.c
-output = calculate
+output = calculator
 CC = gcc
 
 $(output): $(input)
