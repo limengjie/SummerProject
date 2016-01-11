@@ -9,7 +9,6 @@
 INTERVAL=100
 EVENT=LLC-store-misses
 PERF_STAT="sudo ../linux-3.19/tools/perf/perf stat -I $INTERVAL -e $EVENT"
-echo $PERF_STAT
 
 
 #### built-in benchmarks
@@ -26,7 +25,6 @@ call_hashtable ()
   opt0="--get"
   opt1="--count"
   BENCHMARK_CMD="$benchmark $opt0 $ENTRIES $opt1 $ITERATIONS"
-  echo $BENCHMARK_CMD
 }
 
 call_hashtable_log ()
